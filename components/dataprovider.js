@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const DataContext = createContext(null);
 
@@ -6,15 +7,11 @@ export const DataProvider = ({ children }) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const passwords = localStorage.getItem("passwords");
-        if (passwords) {
-            setData(JSON.parse(passwords))
-        }
+        AsyncStorage.getItem("passwords").then((passwords) => { if (passwords) { setData(JSON.parse(passwords)) } });
     }, [])
 
     useEffect(() => {
-        console.log(JSON.stringify(data))
-        localStorage.setItem("passwords", JSON.stringify(data))
+        AsyncStorage.setItem("passwords", JSON.stringify(data))
 
     }, [data])
 

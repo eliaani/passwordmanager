@@ -54,8 +54,11 @@ export default function Manager() {
 {
   setData([...data.slice(0, index), ...data.slice(index + 1)]);
 }
+
     
   };
+
+  console.log(data)
 
   return (
     <View style={styles.container}>
@@ -83,7 +86,7 @@ export default function Manager() {
           style={styles.generateButton}
           onPress={() => getPassword()}
         >
-          <Text style={styles.generateButtonText}>Generate</Text>
+          <Text style={styles.generateButtonText}>Generate  </Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.addButton} onPress={() => handleAdd()}>
@@ -184,7 +187,6 @@ const styles = StyleSheet.create({
   },
   password: {
     marginTop: 5,
-    secureTextEntry: 'true'
   },
   passwordHidden: {
     marginTop: 5,

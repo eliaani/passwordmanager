@@ -8,11 +8,11 @@ import {
   Alert,
 } from 'react-native';
 import { DataContext } from './dataprovider';
-import { Button } from 'react-native-web';
+import { Button } from 'react-native';
 
-export default function Passwordlist({handleDelete, handleEdit, editable}) {
+export default function Passwordlist({ handleDelete, handleEdit, editable }) {
 
-  const {data} = useContext(DataContext)
+  const { data } = useContext(DataContext)
   const renderItem = ({ item, index }) => {
     return (
       <View style={styles.entry}>
@@ -21,30 +21,29 @@ export default function Passwordlist({handleDelete, handleEdit, editable}) {
           <Text style={styles.username}>{item.username}</Text>
           <Text style={styles.password}>***************</Text>
         </View>
-      {editable && 
-        <View style={styles.entryButtons}>
-          <Button
-            onPress={() => handleEdit(index)}
-            title="EDIT"
-            color="green"
-          />
-          <Button
-            onPress={() => handleDelete(index)}
-            title="DELETE"
-            color="red"
-          />
-        </View>
-        }
-        {!editable && 
-        <View style={styles.entryButtons}>
-          <Button
-            onPress={() => navigator.clipboard.writeText(item.password)}
-            title="COPY"
-            color=
-            "#000000"
-          />
-        </View>
-        }
+        {editable ?
+          <View style={styles.entryButtons}>
+            <Button
+              onPress={() => handleEdit(index)}
+              title="EDIT "
+              color="green"
+            />
+            <Button
+              onPress={() => handleDelete(index)}
+              title="DELETE "
+              color="red"
+            />
+          </View>
+          : null}
+        {!editable ?
+          <View style={styles.entryButtons}>
+            <Button
+              onPress={() => navigator.clipboard.writeText(item.password)}
+              title="COPY "
+              color="#000000"
+            />
+          </View>
+          : null}
       </View>
     );
   };
@@ -119,8 +118,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   list: {
-    width: '95vw',
-    marginTop: 20,
+    width: 380,
+    marginTop: 20
   },
   entry: {
     flexDirection: 'row',
@@ -139,14 +138,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
-    padding:10
+    padding: 10
   },
   username: {
     marginTop: 5,
   },
   password: {
     marginTop: 5,
-    secureTextEntry: 'true'
   },
   passwordHidden: {
     marginTop: 5,

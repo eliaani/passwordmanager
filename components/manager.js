@@ -20,7 +20,7 @@ export default function Manager() {
 
   const getPassword = () => {
     fetch(`https://api.api-ninjas.com/v1/passwordgenerator?length=${keyword}`, {
-        headers: {'X-Api-Key': 'b0TqFhgtUBuwTTzxFZz0ww==9UZwBpXqo95F9zC4'}
+        headers: {'X-Api-Key': 'qeVaiAHFjF8orwV1bL4x6g==s3hnaFz35HYWAvWW'}
   })
     .then(response => response.json())
     .then(data => setPassword(data.random_password))
@@ -49,13 +49,25 @@ export default function Manager() {
   };
   
 
-  const handleDelete = (index) => {
-    if (window.confirm('Are you sure you want to DELETE this entry permanently'))
-{
-  setData([...data.slice(0, index), ...data.slice(index + 1)]);
-}
-
-    
+const handleDelete = (index) => {
+  Alert.alert(
+    '!!!',
+    'Are you sure you want to PERMANENTLY delete this entry?',
+    [
+      {
+        text: 'Delete',
+        onPress: () => setData([...data.slice(0, index), ...data.slice(index + 1)]),
+        style: 'delete',
+      },
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+    ],
+    {
+      cancelable: true,
+    },
+  );
   };
 
   console.log(data)

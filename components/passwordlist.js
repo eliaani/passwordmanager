@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { DataContext } from './dataprovider';
 import { Button } from 'react-native';
+import { Clipboard } from 'react-native';
 
 export default function Passwordlist({ handleDelete, handleEdit, editable }) {
 
@@ -38,7 +39,21 @@ export default function Passwordlist({ handleDelete, handleEdit, editable }) {
         {!editable ?
           <View style={styles.entryButtons}>
             <Button
-              onPress={() => navigator.clipboard.writeText(item.password)}
+              onPress={
+                () => Clipboard.setString(item.password) &
+                Alert.alert(
+                  'Password copied to clipboard',
+                  '',
+                  [
+                    {
+                      text: 'ok',
+                    },
+                  ],
+                  {
+                    cancelable: true,
+                  },
+                )
+              }
               title="COPY "
               color="#000000"
             />
